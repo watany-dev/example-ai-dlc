@@ -1,0 +1,6 @@
+{
+  "name": "ai-dlc",
+  "description": "ビジネスのプロジェクト管理・監視・可視化エージェントシステムを spec 駆動で開発する AI-DLC エージェント。",
+  "tools": ["*"],
+  "includeMcpJson": true
+}
