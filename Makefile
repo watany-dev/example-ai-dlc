@@ -12,7 +12,7 @@ check-front:
 	cd front && npm run lint && npm run typecheck && npm test && npm run build
 
 check-back:
-	cd back && uv run ruff check . && uv run mypy src && uv run pytest
+	cd back && uv run ruff format --check . && uv run ruff check . && uv run mypy src && uv run pytest
 
 check-infra:
 	cd infra && npm run typecheck && npm test && npm run synth

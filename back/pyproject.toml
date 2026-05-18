@@ -6,6 +6,9 @@ requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115.0",
     "uvicorn>=0.34.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "structlog>=25.1.0",
 ]
 
 [dependency-groups]
@@ -14,6 +17,10 @@ dev = [
     "httpx>=0.28.0",
     "ruff>=0.9.0",
     "mypy>=1.14.0",
+    "pytest-cov>=6.0.0",
+    "pytest-asyncio>=0.25.0",
+    "hypothesis>=6.120.0",
+    "schemathesis>=3.39.0",
 ]
 
 [build-system]
@@ -28,7 +35,10 @@ line-length = 100
 src = ["src", "tests"]
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "B"]
+select = ["E", "F", "I", "UP", "B", "S", "ASYNC", "SIM", "PT", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
 
 [tool.mypy]
 python_version = "3.12"
@@ -36,3 +46,8 @@ strict = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "--cov=ai_dlc_back --cov-report=term-missing"
+
+[tool.coverage.run]
+source = ["src/ai_dlc_back"]
