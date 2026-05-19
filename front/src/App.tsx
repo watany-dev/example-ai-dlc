@@ -1,3 +1,4 @@
+import { DemoForm } from '@/components/DemoForm'
 import { HealthStatus } from '@/components/HealthStatus'
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
         </p>
       </header>
       <HealthStatus />
+      <DemoForm />
     </main>
   )
 }
