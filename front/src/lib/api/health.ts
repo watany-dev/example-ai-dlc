@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { client } from './client'
 
-export const healthSchema = z.object({
+const healthSchema = z.object({
   status: z.string(),
 })
 

@@ -9,7 +9,7 @@ install:
 check: check-front check-back check-infra
 
 check-front:
-	cd front && npm run lint && npm run typecheck && npm test && npm run build
+	cd front && npm run lint && npm run knip && npm run typecheck && npm test && npm run build
 
 check-back:
 	cd back && uv run ruff format --check . && uv run ruff check . && uv run mypy src && uv run pytest
