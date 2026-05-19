@@ -5,6 +5,8 @@ import App from './App'
 describe('App', () => {
   it('renders the application heading', () => {
     render(<App />)
-    expect(screen.getByRole('heading', { name: 'example-ai-dlc' })).toBeTruthy()
+    expect(
+      screen.getByRole('heading', { name: 'example-ai-dlc' }),
+    ).toBeInTheDocument()
   })
 })
