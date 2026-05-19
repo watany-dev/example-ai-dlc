@@ -11,8 +11,10 @@ inclusion: always
 | Node.js | 22 (LTS) | `.nvmrc` / 各 `package.json` の `engines` |
 | Python | >= 3.12 | `back/pyproject.toml` の `requires-python` |
 | AWS CDK | 2.x (`aws-cdk-lib` / `aws-cdk`) | `infra/package.json` |
+| front 主要ツール | React 19 / Vite 6 / Vitest 3 / Biome 2 / Tailwind CSS 4 / Playwright 1 | `front/package.json` |
 
-バージョンを変更したらこの表と定義ファイルの両方を更新する。
+バージョン (メジャー) を変更したらこの表と定義ファイルの両方を更新する。
+front の個別パッケージの正は `front/package.json`。
 
 ## 必須チェック (commit / push 前)
 
@@ -21,13 +23,19 @@ inclusion: always
 
 | ターゲット | 対象 |
 | --- | --- |
-| `make check-front` | eslint / tsc / vitest / vite build |
+| `make check-front` | biome / knip / tsc / vitest (カバレッジ 100%) / vite build |
 | `make check-back`  | ruff / mypy / pytest |
 | `make check-infra` | tsc / jest / cdk synth |
 
+E2E (Playwright) は `make check-front` に含めず、CI の独立 job で実行する。
+pre-commit では lefthook が Biome を実行する (`npx lefthook install` で有効化)。
+
 ## ツールチェーン
 
-- front: Vite + React + TypeScript、テストは Vitest + Testing Library
+- front: Vite + React + TypeScript。lint/format=Biome、未使用検出=knip、
+  テスト=Vitest + Testing Library + MSW、E2E=Playwright、
+  プロパティテスト=fast-check。UI=Tailwind CSS + shadcn/ui。
+  API 型は openapi-typescript で back の OpenAPI から生成
 - back: uv で依存管理 (`uv sync` / `uv run`)、lint=ruff / 型=mypy / test=pytest
 - infra: AWS CDK v2、テストは Jest + `aws-cdk-lib/assertions`
 

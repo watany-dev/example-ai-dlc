@@ -20,9 +20,12 @@
 `make check` を必ずローカルで通すこと。CI (`.github/workflows/ci.yml`) と同じ
 3 層の lint / typecheck / test を実行する。
 
-- `make check-front` — eslint / tsc / vitest / vite build
+- `make check-front` — biome / knip / tsc / vitest (カバレッジ 100%) / vite build
 - `make check-back` — ruff / mypy / pytest
 - `make check-infra` — tsc / jest / cdk synth
+
+E2E (Playwright) は `make check-front` には含めず、CI の独立 job と
+`cd front && npm run test:e2e` で実行する。
 
 ## skill
 
